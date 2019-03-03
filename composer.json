@@ -1,0 +1,30 @@
+{
+  "name": "elliotjreed/disposable-emails-filter",
+  "license": "MIT",
+  "type": "package",
+  "description": "A PHP package for determining whether an email address is from a disposable / temporary email address provider.",
+  "autoload": {
+    "psr-4": {
+      "ElliotJReed\\DisposableEmail\\": "src/ElliotJReed/DisposableEmail/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\ElliotJReed\\DisposableEmail\\": "tests/ElliotJReed/DisposableEmail/"
+    }
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "phpunit/phpunit": "^7",
+    "squizlabs/php_codesniffer": "^3"
+  },
+  "scripts": {
+    "test": [
+      "@phpunit",
+      "@phpcs"
+    ],
+    "phpunit": "vendor/bin/phpunit -c phpunit.xml",
+    "coverage": "vendor/bin/phpunit -c phpunit.xml --coverage-html ./coverage --coverage-text",
+    "phpcs": "vendor/bin/phpcs --standard=ruleset.xml"
+  }
+}
