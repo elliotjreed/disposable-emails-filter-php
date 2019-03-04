@@ -23,9 +23,9 @@ if (Email::isDisposable('email@not-disposable.com')) {
 ```
 
 
-## Getting Started
+## Getting Started with this Repository
 
-PHP 7 or above and Composer is expected to be installed on our system.
+PHP 7.1 or above and Composer is expected to be installed on our system.
 
 
 ### Installing Composer
@@ -33,7 +33,14 @@ PHP 7 or above and Composer is expected to be installed on our system.
 For instructions on how to install Composer visit [getcomposer.org](https://getcomposer.org/download/).
 
 
-### Installing
+### Installing the Package
+
+```bash
+composer require elliotjreed/disposable-emails-filter
+```
+
+
+### Installing for Development
 
 After cloning this repository, change into the newly created directory and run
 

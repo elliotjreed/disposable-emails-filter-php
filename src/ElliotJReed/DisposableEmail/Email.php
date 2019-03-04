@@ -5,7 +5,7 @@ namespace ElliotJReed\DisposableEmail;
 
 final class Email
 {
-    public static function isDisposable(string $email, string $emailListPath = __DIR__ . '../../../list.txt'): bool
+    public static function isDisposable(string $email, string $emailListPath = __DIR__ . '/../../../list.txt'): bool
     {
         if (!\filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return false;
