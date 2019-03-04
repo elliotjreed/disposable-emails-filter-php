@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/elliotjreed/disposable-emails-filter-php.svg?branch=master)](https://travis-ci.org/elliotjreed/disposable-emails-filter-php)[![Coverage Status](https://coveralls.io/repos/github/elliotjreed/disposable-emails-filter-php/badge.svg?branch=master)](https://coveralls.io/github/elliotjreed/disposable-emails-filter-php?branch=master)
+
 # Disposable / Temporary Email Address Filter
 
 This package provides a method for determining whether an email address is a disposable / temporary email address.

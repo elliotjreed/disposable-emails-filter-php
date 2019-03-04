@@ -37,4 +37,12 @@ final class DisposableEmailTest extends TestCase
 
         $this->assertFalse($email);
     }
+
+    public function testItReturnsFalseWhenEmailIsInvalid(): void
+    {
+        $this->list->fwrite('@disposable.com');
+        $email = Email::isDisposable('invalid email address', $this->list->getRealPath());
+
+        $this->assertFalse($email);
+    }
 }

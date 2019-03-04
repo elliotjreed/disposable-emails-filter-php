@@ -2,6 +2,20 @@ matrix:
   include:
     - language: php
       sudo: false
+      php: 7.3
+      cache:
+        directories:
+          - $HOME/.composer/cache/files
+      before_script:
+        - composer install
+      script:
+        - vendor/bin/phpunit -c phpunit.xml --coverage-clover ./build/logs/clover.xml
+        - vendor/bin/phpcs --standard=ruleset.xml
+      after_success:
+        - travis_retry php vendor/bin/php-coveralls
+
+    - language: php
+      sudo: false
       php: 7.2
       cache:
         directories:
@@ -9,7 +23,15 @@ matrix:
       before_script:
         - composer install
       script:
-        - vendor/bin/phpunit -c phpunit.xml --coverage-clover ./coverage/clover.xml
-        - vendor/bin/phpcs -q -n --colors --standard=ruleset.xml
-      after_success:
-        - travis_retry php vendor/bin/php-coveralls
+        - vendor/bin/phpunit -c phpunit.xml
+
+    - language: php
+      sudo: false
+      php: 7.1
+      cache:
+        directories:
+          - $HOME/.composer/cache/files
+      before_script:
+        - composer install
+      script:
+        - vendor/bin/phpunit -c phpunit.xml
