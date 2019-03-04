@@ -16,7 +16,7 @@ final class Email
 
     private static function inDisposableEmailList(string $email, string $emailListPath): bool
     {
-        $emailDomain = \substr($email, \strpos($email, '@'));
+        $emailDomain = \substr($email, \strpos($email, '@') + 1);
         $file = new \SplFileObject($emailListPath);
         $emailList = \explode("\n", $file->fread($file->getSize()));
 

@@ -24,7 +24,7 @@ final class DisposableEmailTest extends TestCase
 
     public function testItReturnsTrueWhenEmailIsInDisposableEmailList(): void
     {
-        $this->list->fwrite('@disposable.com');
+        $this->list->fwrite('disposable.com');
         $email = Email::isDisposable('email@disposable.com', $this->list->getRealPath());
 
         $this->assertTrue($email);
@@ -32,7 +32,7 @@ final class DisposableEmailTest extends TestCase
 
     public function testItReturnsFalseWhenEmailIsNotInDisposableEmailList(): void
     {
-        $this->list->fwrite('@disposable.com');
+        $this->list->fwrite('disposable.com');
         $email = Email::isDisposable('email@not-disposable.com', $this->list->getRealPath());
 
         $this->assertFalse($email);
@@ -40,7 +40,7 @@ final class DisposableEmailTest extends TestCase
 
     public function testItReturnsFalseWhenEmailIsInvalid(): void
     {
-        $this->list->fwrite('@disposable.com');
+        $this->list->fwrite('disposable.com');
         $email = Email::isDisposable('invalid email address', $this->list->getRealPath());
 
         $this->assertFalse($email);
