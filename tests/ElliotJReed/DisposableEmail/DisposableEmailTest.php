@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\ElliotJReed\DisposableEmail;
 
 use ElliotJReed\DisposableEmail\Email;
+use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use PHPUnit\Framework\TestCase;
 use SplFileObject;
 
@@ -38,11 +39,12 @@ final class DisposableEmailTest extends TestCase
         $this->assertFalse($email);
     }
 
-    public function testItReturnsFalseWhenEmailIsInvalid(): void
+    public function testItThrowsInvalidEmailExceptionWhenEmailIsInvalid(): void
     {
         $this->list->fwrite('disposable.com');
-        $email = Email::isDisposable('invalid email address', $this->list->getRealPath());
 
-        $this->assertFalse($email);
+        $this->expectException(InvalidEmailException::class);
+
+        Email::isDisposable('invalid email address', $this->list->getRealPath());
     }
 }
