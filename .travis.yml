@@ -26,7 +26,12 @@ matrix:
                 git tag -a "${tag}"
                 git -c user.name='elliotjreed-travis-automated-build' -c user.email='travis-automated-build@elliotjreed.com' commit -m init
                 git push -f -q https://elliotjreed:$GITHUB_API_KEY@github.com/elliotjreed/disposable-emails-filter-php master &>/dev/null
+              else
+                echo "No new updates from github.com/martenson/disposable-email-domains"
               fi
+            else
+              echo "GitHub API not provided"
+              exit 1
             fi
 
     - language: php
