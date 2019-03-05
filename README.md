@@ -22,6 +22,18 @@ if (Email::isDisposable('email@not-disposable.com')) {
 }
 ```
 
+If an invalid [email address](https://www.ietf.org/rfc/rfc0822.txt) is provided then an `InvalidEmailException` is thrown, so it is advisable to check that the email address is valid first. For example:
+
+```php
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (Email::isDisposable('email@not-disposable.com')) {
+        echo 'This is a disposable / temporary email address';
+    }
+} else {
+    echo 'This is not a valid email address';
+}
+```
+
 
 ## Getting Started with this Repository
 
