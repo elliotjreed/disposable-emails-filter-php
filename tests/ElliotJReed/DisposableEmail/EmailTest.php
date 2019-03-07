@@ -8,7 +8,7 @@ use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use PHPUnit\Framework\TestCase;
 use SplFileObject;
 
-final class DisposableEmailTest extends TestCase
+final class EmailTest extends TestCase
 {
     /** @var SplFileObject|null */
     private $list;
