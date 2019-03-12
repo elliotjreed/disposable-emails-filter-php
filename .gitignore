@@ -5,3 +5,4 @@
 /testdox/
 /source_data/
 /build/
+/.phpunit.result.cache
