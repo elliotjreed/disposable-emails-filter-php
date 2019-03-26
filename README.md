@@ -8,7 +8,6 @@ All credit to the maintaining of the list of disposable / temporary email addres
 
 This project and it's maintainer(s) do not discourage the use of such disposable / temporary email addresses, but simply allows for the detection of such.
 
-
 ## Usage
 
 ```php
@@ -41,23 +40,19 @@ Would output:
 This is not a valid email address
 ```
 
-
 ## Getting Started with this Repository
 
 PHP 7.1 or above and Composer is expected to be installed on our system.
 
-
 ### Installing Composer
 
 For instructions on how to install Composer visit [getcomposer.org](https://getcomposer.org/download/).
-
 
 ### Installing the Package
 
 ```bash
 composer require elliotjreed/disposable-emails-filter
 ```
-
 
 ### Installing for Development
 
@@ -75,7 +70,6 @@ php composer.phar install
 
 This will install all dependencies needed for the project.
 
-
 ## Running the Tests
 
 All tests can be run by executing
@@ -86,14 +80,12 @@ vendor/bin/phpunit
 
 `phpunit` will automatically find all tests inside the `test` directory and run them based on the configuration in the `phpunit.xml` file.
 
-
 ## Built With
 
 - [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
 - [PHP](https://secure.php.net/)
 - [Composer](https://getcomposer.org/)
 - [PHPUnit](https://phpunit.de/)
-
 
 ## License
 
