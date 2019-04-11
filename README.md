@@ -16,7 +16,7 @@ require 'vendor/autoload.php';
 
 use ElliotJReed\DisposableEmail\Email;
 
-if (Email::isDisposable('email@temporarymailaddress.com')) {
+if ((new Email())->isDisposable('email@temporarymailaddress.com')) {
     echo 'This is a disposable / temporary email address';
 }
 ```
@@ -26,7 +26,7 @@ If an invalid [email address](https://www.ietf.org/rfc/rfc0822.txt) is provided 
 ```php
 $email = 'not-a-real-email-address#example.net'
 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    if (Email::isDisposable($email)) {
+    if ((new Email())->isDisposable($email)) {
         echo 'This is a disposable / temporary email address';
     }
 } else {

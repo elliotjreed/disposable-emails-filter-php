@@ -10,7 +10,7 @@ use SplFileObject;
 
 final class EmailTest extends TestCase
 {
-    /** @var SplFileObject|null */
+    /** @var SplFileObject */
     private $list;
 
     public function setUp(): void
@@ -26,7 +26,7 @@ final class EmailTest extends TestCase
     public function testItReturnsTrueWhenEmailIsInDisposableEmailList(): void
     {
         $this->list->fwrite('disposable.com');
-        $email = Email::isDisposable('email@disposable.com', $this->list->getRealPath());
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@disposable.com');
 
         $this->assertTrue($email);
     }
@@ -34,7 +34,7 @@ final class EmailTest extends TestCase
     public function testItReturnsFalseWhenEmailIsNotInDisposableEmailList(): void
     {
         $this->list->fwrite('disposable.com');
-        $email = Email::isDisposable('email@not-disposable.com', $this->list->getRealPath());
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@not-disposable.com');
 
         $this->assertFalse($email);
     }
@@ -45,6 +45,6 @@ final class EmailTest extends TestCase
 
         $this->expectException(InvalidEmailException::class);
 
-        Email::isDisposable('invalid email address', $this->list->getRealPath());
+        (new Email($this->list->getRealPath()))->isDisposable('invalid email address');
     }
 }
