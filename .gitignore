@@ -3,6 +3,7 @@
 /.idea/
 /coverage/
 /testdox/
+/mutation
 /source_data/
 /build/
-/.phpunit.result.cache
+.phpunit.result.cache

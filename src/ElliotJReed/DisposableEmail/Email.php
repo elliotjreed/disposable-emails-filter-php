@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ElliotJReed\DisposableEmail;
+namespace ElliotJReed\DisposableEmail\Static;
 
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 

@@ -1,0 +1,26 @@
+{
+  "source": {
+    "directories": [
+      "src"
+    ],
+    "excludes": [
+      "coverage",
+      "vendor",
+      "mutation"
+    ]
+  },
+  "timeout": 10,
+  "logs": {
+    "text": "mutation/infection.log",
+    "summary": "mutation/summary.log",
+    "perMutator": "mutation/per-mutator.md",
+    "badge": {
+      "branch": "master"
+    }
+  },
+  "mutators": {
+    "@default": true,
+    "@function_signature": false
+  },
+  "testFramework": "phpunit"
+}
