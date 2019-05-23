@@ -8,14 +8,15 @@ use SplFileObject;
 
 final class Email
 {
-    private $disposableEmailAddressDomainsListPath;
+    private $emailList;
 
     /**
      * @param string $emailListPath The path to a custom list of email domains. The default is the list maintained by [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains).
      */
     public function __construct(string $emailListPath = __DIR__ . '/../../../list.txt')
     {
-        $this->disposableEmailAddressDomainsListPath = $emailListPath;
+        $file = new SplFileObject($emailListPath);
+        $this->emailList = \explode("\n", $file->fread($file->getSize()));
     }
 
     /**
@@ -39,10 +40,8 @@ final class Email
     private function inDisposableEmailList(string $email): bool
     {
         $emailDomain = $this->getEmailDomainFromFullEmailAddress($email);
-        $file = new SplFileObject($this->disposableEmailAddressDomainsListPath);
-        $emailList = \explode("\n", $file->fread($file->getSize()));
 
-        return \in_array($this->normaliseEmailDomain($emailDomain), $emailList, true);
+        return \in_array($this->normaliseEmailDomain($emailDomain), $this->emailList, true);
     }
 
     /**
