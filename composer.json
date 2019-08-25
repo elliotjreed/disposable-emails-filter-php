@@ -3,6 +3,14 @@
   "license": "MIT",
   "type": "package",
   "description": "A PHP package for determining whether an email address is from a disposable / temporary email address provider.",
+  "authors": [
+    {
+      "name": "Elliot J. Reed",
+      "email": "disposable-emails-development@elliotjreed.com",
+      "homepage": "https://www.elliotjreed.com",
+      "role": "Developer"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "ElliotJReed\\DisposableEmail\\": "src/ElliotJReed/DisposableEmail/"
