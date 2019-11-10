@@ -33,14 +33,3 @@ matrix:
             echo "GitHub API key not provided"
             exit 1
           fi
-
-    - language: php
-      sudo: false
-      php: 7.2
-      cache:
-        directories:
-          - $HOME/.composer/cache/files
-      before_script:
-        - composer install
-      script:
-        - vendor/bin/phpunit -c phpunit.xml
