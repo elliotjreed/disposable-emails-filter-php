@@ -58,13 +58,13 @@ composer require elliotjreed/disposable-emails-filter
 
 After cloning this repository, change into the newly created directory and run
 
-```
+```bash
 composer install
 ```
 
 or if you have installed Composer locally
 
-```
+```bash
 php composer.phar install
 ```
 
@@ -74,7 +74,7 @@ This will install all dependencies needed for the project.
 
 All tests can be run by executing
 
-```
+```bash
 vendor/bin/phpunit
 ```
 
@@ -82,10 +82,10 @@ vendor/bin/phpunit
 
 ## Built With
 
-- [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
-- [PHP](https://secure.php.net/)
-- [Composer](https://getcomposer.org/)
-- [PHPUnit](https://phpunit.de/)
+  - [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
+  - [PHP](https://secure.php.net/)
+  - [Composer](https://getcomposer.org/)
+  - [PHPUnit](https://phpunit.de/)
 
 ## License
 
