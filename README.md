@@ -82,10 +82,10 @@ vendor/bin/phpunit
 
 ## Built With
 
-  - [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
-  - [PHP](https://secure.php.net/)
-  - [Composer](https://getcomposer.org/)
-  - [PHPUnit](https://phpunit.de/)
+- [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
+- [PHP](https://secure.php.net/)
+- [Composer](https://getcomposer.org/)
+- [PHPUnit](https://phpunit.de/)
 
 ## License
 
