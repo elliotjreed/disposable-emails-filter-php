@@ -11,8 +11,7 @@ use SplFileObject;
 
 final class EmailTest extends TestCase
 {
-    /** @var SplFileObject */
-    private $list;
+    private SplFileObject $list;
 
     public function setUp(): void
     {

@@ -9,7 +9,7 @@ use SplFileObject;
 
 final class Email
 {
-    private $emailList;
+    private array $emailList;
 
     /**
      * @param string $emailListPath The path to a custom list of email domains. The default is the list maintained by [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains).
