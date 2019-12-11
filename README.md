@@ -42,7 +42,7 @@ This is not a valid email address
 
 ## Getting Started with this Repository
 
-PHP 7.1 or above and Composer is expected to be installed on our system.
+PHP 7.4 or above and Composer is expected to be installed on our system.
 
 ### Installing Composer
 
