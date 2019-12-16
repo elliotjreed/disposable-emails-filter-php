@@ -39,7 +39,6 @@ final class Email
      * @param string $email The email address to check whether it is a disposable or temporary email address
      * @return bool
      * @throws InvalidDomainListException
-     * @throws InvalidEmailException
      */
     private function inDisposableEmailList(string $email): bool
     {
@@ -51,17 +50,10 @@ final class Email
     /**
      * @param string $email The full email address.
      * @return string
-     * @throws InvalidEmailException
      */
     private function getEmailDomainFromFullEmailAddress(string $email): string
     {
-        $domain = \substr($email, (int) \strpos($email, '@') + 1);
-
-        if ($domain === false) {
-            throw new InvalidEmailException();
-        }
-
-        return $domain;
+        return (string) \substr($email, (int) \strpos($email, '@') + 1);
     }
 
     /**
