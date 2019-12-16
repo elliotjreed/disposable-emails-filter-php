@@ -44,7 +44,7 @@ final class Email
     {
         $emailDomain = $this->getEmailDomainFromFullEmailAddress($email);
 
-        return \in_array($this->normaliseEmailDomain($emailDomain), $this->getDomainsFromFile(), true);
+        return \in_array(\strtolower($emailDomain), $this->getDomainsFromFile(), true);
     }
 
     /**
@@ -54,15 +54,6 @@ final class Email
     private function getEmailDomainFromFullEmailAddress(string $email): string
     {
         return (string) \substr($email, (int) \strpos($email, '@') + 1);
-    }
-
-    /**
-     * @param string $emailDomain The email domain following the "@" symbol.
-     * @return string
-     */
-    private function normaliseEmailDomain(string $emailDomain): string
-    {
-        return \strtolower(\trim($emailDomain));
     }
 
     /**

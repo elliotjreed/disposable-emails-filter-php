@@ -32,6 +32,14 @@ final class EmailTest extends TestCase
         $this->assertTrue($email);
     }
 
+    public function testItReturnsTrueWhenEmailIsInDisposableEmailListAndProvidedEmailIsUppercase(): void
+    {
+        $this->list->fwrite('disposable.com');
+        $email = (new Email($this->list->getRealPath()))->isDisposable('EMAIL@DISPOSABLE.COM');
+
+        $this->assertTrue($email);
+    }
+
     public function testItReturnsFalseWhenEmailIsNotInDisposableEmailList(): void
     {
         $this->list->fwrite('disposable.com');

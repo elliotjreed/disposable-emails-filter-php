@@ -12,6 +12,7 @@ This project and it's maintainer(s) do not discourage the use of such disposable
 
 ```php
 <?php
+
 require 'vendor/autoload.php';
 
 use ElliotJReed\DisposableEmail\Email;
@@ -24,7 +25,14 @@ if ((new Email())->isDisposable('email@temporarymailaddress.com')) {
 If an invalid [email address](https://www.ietf.org/rfc/rfc0822.txt) is provided then an `InvalidEmailException` is thrown, so it is advisable to check that the email address is valid first. For example:
 
 ```php
-$email = 'not-a-real-email-address#example.net'
+<?php
+
+require 'vendor/autoload.php';
+
+use ElliotJReed\DisposableEmail\Email;
+
+$email = 'not-a-real-email-address#example.net';
+
 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     if ((new Email())->isDisposable($email)) {
         echo 'This is a disposable / temporary email address';
