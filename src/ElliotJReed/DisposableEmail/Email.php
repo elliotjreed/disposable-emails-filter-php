@@ -73,8 +73,8 @@ final class Email
     {
         $file = new SplFileObject($this->emailListPath);
         $fileContents = $file->fread($file->getSize());
-        if ($fileContents === false) {
-            throw new InvalidDomainListException('Could not read file: ' . $this->emailListPath);
+        if ($fileContents === false || \strlen($fileContents) < 3) {
+            throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);
         }
 
         return \explode("\n", $fileContents);

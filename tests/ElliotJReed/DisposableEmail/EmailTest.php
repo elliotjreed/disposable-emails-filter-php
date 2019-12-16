@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\ElliotJReed\DisposableEmail;
 
 use ElliotJReed\DisposableEmail\Email;
+use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use PHPUnit\Framework\TestCase;
 use SplFileObject;
@@ -48,12 +49,12 @@ final class EmailTest extends TestCase
         (new Email($this->list->getRealPath()))->isDisposable('invalid email address');
     }
 
-    public function testItThrowsInvalidDomainListExceptionWhenFileCannotBeRead(): void
+    public function testItThrowsInvalidDomainListExceptionWhenFileDoesNotAppearValid(): void
     {
-        $this->list->fwrite('disposable.com');
+        $this->list->fwrite('a');
 
-        $this->expectException(InvalidEmailException::class);
+        $this->expectException(InvalidDomainListException::class);
 
-        (new Email(''))->isDisposable('invalid email address');
+        (new Email($this->list->getRealPath()))->isDisposable('email@not-disposable.com');
     }
 }
