@@ -7,3 +7,4 @@
 /source_data/
 /build/
 .phpunit.result.cache
+/infection.log

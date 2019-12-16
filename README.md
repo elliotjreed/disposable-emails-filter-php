@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/elliotjreed/disposable-emails-filter-php.svg?branch=master)](https://travis-ci.org/elliotjreed/disposable-emails-filter-php)[![Coverage Status](https://coveralls.io/repos/github/elliotjreed/disposable-emails-filter-php/badge.svg?branch=master)](https://coveralls.io/github/elliotjreed/disposable-emails-filter-php?branch=master)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) [![Build Status](https://travis-ci.org/elliotjreed/disposable-emails-filter-php.svg?branch=master)](https://travis-ci.org/elliotjreed/disposable-emails-filter-php) [![Coverage Status](https://coveralls.io/repos/github/elliotjreed/disposable-emails-filter-php/badge.svg?branch=master)](https://coveralls.io/github/elliotjreed/disposable-emails-filter-php?branch=master)
 
 # Disposable / Temporary Email Address Filter
 

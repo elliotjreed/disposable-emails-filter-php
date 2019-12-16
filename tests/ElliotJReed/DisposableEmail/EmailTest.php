@@ -47,4 +47,13 @@ final class EmailTest extends TestCase
 
         (new Email($this->list->getRealPath()))->isDisposable('invalid email address');
     }
+
+    public function testItThrowsInvalidDomainListExceptionWhenFileCannotBeRead(): void
+    {
+        $this->list->fwrite('disposable.com');
+
+        $this->expectException(InvalidEmailException::class);
+
+        (new Email(''))->isDisposable('invalid email address');
+    }
 }
