@@ -7,7 +7,7 @@ matrix:
         directories:
           - $HOME/.composer/cache/files
       before_script:
-        - apt install php-ast
+        - sudo apt install php-ast
         - composer install
       script:
         - composer run-script travis
