@@ -1,12 +1,13 @@
 matrix:
   include:
     - language: php
-      sudo: false
+      sudo: true
       php: 7.4
       cache:
         directories:
           - $HOME/.composer/cache/files
       before_script:
+        - apt install php-ast
         - composer install
       script:
         - composer run-script travis
