@@ -32,6 +32,14 @@ final class EmailTest extends TestCase
         $this->assertTrue($email);
     }
 
+    public function testItNormalisesLineEndingsInEmailList(): void
+    {
+        $this->list->fwrite("temporary.com\r\ndisposable.com\r\n");
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@disposable.com');
+
+        $this->assertTrue($email);
+    }
+
     public function testItReturnsTrueWhenEmailIsInDisposableEmailListAndProvidedEmailIsUppercase(): void
     {
         $this->list->fwrite('disposable.com');

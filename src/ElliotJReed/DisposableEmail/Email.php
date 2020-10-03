@@ -8,7 +8,7 @@ use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use SplFileObject;
 
-final class Email
+class Email
 {
     private string $emailListPath;
 
@@ -67,6 +67,8 @@ final class Email
         if ($fileContents === false || \strlen($fileContents) < 3) {
             throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);
         }
+
+        $fileContents = \preg_replace('~\R~u', "\n", $fileContents);
 
         return \explode("\n", $fileContents);
     }
