@@ -8,7 +8,7 @@ matrix:
           - $HOME/.composer/cache/files
       before_script:
         - pecl install ast
-        - composer install
+        - composer install --no-interaction --classmap-authoritative --no-suggest --no-progress --ignore-platform-reqs
       script:
         - composer run-script travis
       after_success:
@@ -33,3 +33,13 @@ matrix:
             echo "GitHub API key not provided"
             exit 1
           fi
+    - language: php
+      sudo: true
+      php: 8.0
+      cache:
+        directories:
+          - $HOME/.composer/cache/files
+      before_script:
+        - composer install --no-interaction --classmap-authoritative --no-suggest --no-progress --ignore-platform-reqs
+      script:
+        - composer run-script phpunit
