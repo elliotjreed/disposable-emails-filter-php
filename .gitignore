@@ -8,3 +8,4 @@
 /build/
 .phpunit.result.cache
 /infection.log
+/composer.lock
