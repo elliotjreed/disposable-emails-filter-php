@@ -47,7 +47,7 @@
     "phpunit": "vendor/bin/phpunit -c phpunit.xml",
     "phpunit:debug": "vendor/bin/phpunit --stop-on-failure -c phpunit.xml",
     "phpunit:coverage": "vendor/bin/phpunit -c phpunit.xml --coverage-html ./coverage --coverage-text",
-    "phpunit:ci": "mkdir -p ./build/logs && vendor/bin/simple-phpunit -c phpunit.xml --coverage-text=coverage.txt --coverage-clover ./build/logs/clover.xml",
+    "phpunit:ci": "mkdir -p ./build/logs && vendor/bin/phpunit -c phpunit.xml --coverage-text=coverage.txt --coverage-clover ./build/logs/clover.xml",
     "phpcs": "vendor/bin/php-cs-fixer fix --allow-risky=yes && vendor/bin/phpcs --standard=phpcs.xml",
     "phpcs:ci": "vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run && vendor/bin/phpcs --standard=phpcs.xml",
     "psalm": "vendor/bin/psalm",
