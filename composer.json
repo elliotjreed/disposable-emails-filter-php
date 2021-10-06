@@ -25,46 +25,39 @@
     "php": "^7.4|^8.0"
   },
   "require-dev": {
-    "infection/infection": "^0.24",
+    "friendsofphp/php-cs-fixer": "^3.2",
     "php-coveralls/php-coveralls": "^2.4",
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.6",
-    "vimeo/psalm": "^4.9",
-    "phan/phan": "^5.1"
+    "vimeo/psalm": "^4.10"
   },
   "scripts": {
     "setup": [
-      "@phan:init",
       "@psalm:init"
     ],
     "static-analysis": [
-      "@phan",
       "@psalm"
-    ],
-    "mutation": [
-      "@infection"
     ],
     "test": [
       "@phpunit:coverage",
       "@static-analysis",
       "@phpcs"
     ],
-    "travis": [
-      "@phpunit:travis",
-      "@static-analysis",
-      "@phpcs"
-    ],
     "phpunit": "vendor/bin/phpunit -c phpunit.xml",
     "phpunit:debug": "vendor/bin/phpunit --stop-on-failure -c phpunit.xml",
     "phpunit:coverage": "vendor/bin/phpunit -c phpunit.xml --coverage-html ./coverage --coverage-text",
-    "phpunit:travis": "vendor/bin/phpunit -c phpunit.xml --coverage-clover ./build/logs/clover.xml",
-    "phpcs": "vendor/bin/phpcs --standard=ruleset.xml",
-    "phpcs:fix": "vendor/bin/phpcbf --standard=ruleset.xml",
-    "phan": "PHAN_DISABLE_XDEBUG_WARN=1 vendor/bin/phan",
-    "phan:init": "vendor/bin/phan --init --init-level=1",
+    "phpunit:ci": "mkdir -p ./build/logs && vendor/bin/phpunit -c phpunit.xml --coverage-text=coverage.txt --coverage-clover ./build/logs/clover.xml",
+    "phpcs": "vendor/bin/php-cs-fixer fix --allow-risky=yes && vendor/bin/phpcs --standard=phpcs.xml",
+    "phpcs:ci": "vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run && vendor/bin/phpcs --standard=phpcs.xml",
     "psalm": "vendor/bin/psalm",
-    "psalm:init": "vendor/bin/psalm --init src 1",
-    "infection": "vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=100 --min-msi=100"
+    "psalm:init": "vendor/bin/psalm --init src 1"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
   }
 }

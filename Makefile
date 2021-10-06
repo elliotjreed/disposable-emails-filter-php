@@ -6,13 +6,10 @@ vendor: composer.json composer.lock
 
 .PHONY: test coding-standards static-analysis unit-tests composer-validate composer-outdated
 
-test: coding-standards static-analysis unit-tests mutation composer-validate composer-outdated
+test: coding-standards static-analysis unit-tests composer-validate composer-outdated
 
 static-analysis: vendor
 	composer run-script static-analysis
-
-mutation: vendor
-	composer run-script mutation
 
 unit-tests: vendor
 	composer run-script phpunit:coverage

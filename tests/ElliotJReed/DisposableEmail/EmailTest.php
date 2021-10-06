@@ -14,12 +14,12 @@ final class EmailTest extends TestCase
 {
     private SplFileObject $list;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->list = new SplFileObject(\sys_get_temp_dir() . '/disposable_email_test.txt', 'wb');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         \unlink($this->list->getRealPath());
     }
