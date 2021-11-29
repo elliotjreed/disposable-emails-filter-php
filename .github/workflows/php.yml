@@ -35,7 +35,7 @@ jobs:
         run: composer install --no-interaction --classmap-authoritative --no-progress
 
       - name: Run PHP Code Sniffer and PHP CS Fixer (dry run)
-        run: composer run-script phpcs:ci
+        run: PHP_CS_FIXER_IGNORE_ENV=1 composer run-script phpcs:ci
 
       - name: Run unit tests
-        run: PHP_CS_FIXER_IGNORE_ENV=1 composer run-script phpunit:ci
+        run: composer run-script phpunit:ci
