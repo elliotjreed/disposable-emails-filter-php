@@ -6,7 +6,6 @@ composer.phar
 .php-cs-fixer.cache
 /coverage
 infection.log
-composer.lock
 /build
 .DS_Store
 .docker-sync
