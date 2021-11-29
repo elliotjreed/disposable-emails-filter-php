@@ -8,7 +8,7 @@ matrix:
           - $HOME/.composer/cache/files
       before_script:
         - pecl install ast
-        - composer install --no-interaction --classmap-authoritative --no-suggest --no-progress --ignore-platform-reqs
+        - composer install --no-interaction --classmap-authoritative --no-progress --ignore-platform-reqs
       script:
         - composer run-script travis
       after_success:
@@ -40,6 +40,16 @@ matrix:
         directories:
           - $HOME/.composer/cache/files
       before_script:
-        - composer install --no-interaction --classmap-authoritative --no-suggest --no-progress --ignore-platform-reqs
+        - composer install --no-interaction --classmap-authoritative --no-progress --ignore-platform-reqs
+      script:
+        - composer run-script phpunit
+    - language: php
+      sudo: true
+      php: 8.1
+      cache:
+        directories:
+          - $HOME/.composer/cache/files
+      before_script:
+        - composer install --no-interaction --classmap-authoritative --no-progress --ignore-platform-reqs
       script:
         - composer run-script phpunit

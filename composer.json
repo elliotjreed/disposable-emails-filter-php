@@ -30,7 +30,7 @@
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.6",
-    "vimeo/psalm": "^4.9",
+    "vimeo/psalm": "^4.13",
     "phan/phan": "^5.1"
   },
   "scripts": {
