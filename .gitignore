@@ -9,6 +9,7 @@ infection.log
 /build
 .DS_Store
 .docker-sync
+composer.lock
 yarn-error.log
 /.env.local
 /.env.local.php
