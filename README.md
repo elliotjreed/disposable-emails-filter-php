@@ -83,7 +83,7 @@ This will install all dependencies needed for the project.
 All tests can be run by executing
 
 ```bash
-vendor/bin/phpunit
+composer run-script test
 ```
 
 `phpunit` will automatically find all tests inside the `test` directory and run them based on the configuration in the `phpunit.xml` file.
