@@ -1,10 +1,10 @@
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) [![Build Status](https://travis-ci.org/elliotjreed/disposable-emails-filter-php.svg?branch=master)](https://travis-ci.org/elliotjreed/disposable-emails-filter-php) [![Coverage Status](https://coveralls.io/repos/github/elliotjreed/disposable-emails-filter-php/badge.svg?branch=master)](https://coveralls.io/github/elliotjreed/disposable-emails-filter-php?branch=master)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
 # Disposable / Temporary Email Address Filter
 
 This package provides a method for determining whether an email address is a disposable / temporary email address.
 
-All credit to the maintaining of the list of disposable / temporary email addresses goes to [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains).
+All credit to the maintaining of the list of disposable / temporary email addresses goes to [github.com/disposable-email-domains/disposable-email-domains](https://github.com/disposable-email-domains/disposable-email-domains).
 
 This project and it's maintainer(s) do not discourage the use of such disposable / temporary email addresses, but simply allows for the detection of such.
 
@@ -48,6 +48,27 @@ Would output:
 This is not a valid email address
 ```
 
+You can also provide your own custom domain list in a new line separated plain-text file, for example:
+
+```text
+example.com
+example.net
+```
+
+Then passing the file location into the constructor:
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use ElliotJReed\DisposableEmail\Email;
+
+new Email('/path/to/custom/list.txt');
+```
+
+If an invalid list is provided then an `InvalidDomainListException` is thrown.
+
 ## Getting Started with this Repository
 
 PHP 7.4 or above and Composer is expected to be installed on our system.
@@ -90,7 +111,7 @@ composer run-script test
 
 ## Built With
 
-  - [github.com/martenson/disposable-email-domains](https://github.com/martenson/disposable-email-domains)
+  - [github.com/disposable-email-domains/disposable-email-domains](https://github.com/disposable-email-domains/disposable-email-domains)
   - [PHP](https://secure.php.net/)
   - [Composer](https://getcomposer.org/)
   - [PHPUnit](https://phpunit.de/)
