@@ -43,6 +43,8 @@ jobs:
             git clone https://github.com/disposable-email-domains/disposable-email-domains.git source_data
             if ! diff -q ./list.txt ./source_data/disposable_email_blocklist.conf &>/dev/null; then
               mv ./source_data/disposable_email_blocklist.conf ./list.txt
+              git config --global user.email "${{ secrets.GIT_CONFIG_EMAIL }}"
+              git config --global user.name "Elliot J. Reed"
               git add ./list.txt
               git commit -m "Updates disposable email blocklist from github.com/disposable-email-domains/disposable-email-domains via Github Actions"
               tag=$(git describe --tags | cut -f1 -d"-" | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{$NF=sprintf("%0*d", length($NF), ($NF+1)); print}')
