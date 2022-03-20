@@ -37,7 +37,7 @@ jobs:
       - name: Run unit tests
         run: composer run-script phpunit:ci
 
-      - name: Run unit tests
+      - name: Run disposable email list updater
         run:  |
           if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
             git clone https://github.com/disposable-email-domains/disposable-email-domains.git source_data
