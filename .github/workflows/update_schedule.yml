@@ -1,0 +1,59 @@
+name: Update domain list on schedule
+on:
+  schedule:
+    - cron: '30 7 * * *'
+jobs:
+  php:
+    name: (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['8.1']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+          tools: cs2pr
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --classmap-authoritative --no-progress
+
+      - name: Run unit tests
+        run: composer run-script phpunit:ci
+
+      - name: Run unit tests
+        run:  |
+          if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
+            git clone https://github.com/disposable-email-domains/disposable-email-domains.git source_data
+            if ! diff -q ./list.txt ./source_data/disposable_email_blocklist.conf &>/dev/null; then
+              mv ./source_data/disposable_email_blocklist.conf ./list.txt
+              git add ./list.txt
+              git commit -m "Updates disposable email blocklist from github.com/disposable-email-domains/disposable-email-domains via Github Actions"
+              tag=$(git describe --tags | cut -f1 -d"-" | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{$NF=sprintf("%0*d", length($NF), ($NF+1)); print}')
+              git tag -a "${tag}" -m "Updated disposable email blocklist from github.com/disposable-email-domains/disposable-email-domains via Github Actions"
+              git push --follow-tags -q "https://elliotjreed:${{ secrets.GITHUB_TOKEN }}@github.com/elliotjreed/disposable-emails-filter-php" HEAD:master > /dev/null 2>&1
+              else
+              echo "No new updates from github.com/disposable-email-domains/disposable-email-domains"
+            fi
+          else
+            echo "GitHub API key not provided"
+            exit 1
+          fi
