@@ -10,6 +10,8 @@ This project and it's maintainer(s) do not discourage the use of such disposable
 
 ## Usage
 
+The checker / filter can either be used via a static or non-static means:
+
 ```php
 <?php
 
@@ -18,6 +20,20 @@ require 'vendor/autoload.php';
 use ElliotJReed\DisposableEmail\Email;
 
 if ((new Email())->isDisposable('email@temporarymailaddress.com')) {
+    echo 'This is a disposable / temporary email address';
+}
+```
+
+or
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use ElliotJReed\DisposableEmail\DisposableEmail;
+
+if (DisposableEmail::isDisposable('email@temporarymailaddress.com')) {
     echo 'This is a disposable / temporary email address';
 }
 ```
@@ -68,6 +84,9 @@ new Email('/path/to/custom/list.txt');
 ```
 
 If an invalid list is provided then an `InvalidDomainListException` is thrown.
+
+
+###
 
 ## Getting Started with this Repository
 

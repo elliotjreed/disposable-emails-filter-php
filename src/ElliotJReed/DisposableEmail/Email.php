@@ -25,8 +25,10 @@ class Email
     /**
      * @param string $email The email address to check whether it is a disposable or temporary email address
      *
-     * @throws InvalidEmailException
-     * @throws InvalidDomainListException
+     * @return bool Returns true when the provided email address is likely to be a disposable or temporary email address
+     *
+     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException
+     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException
      */
     public function isDisposable(string $email): bool
     {
@@ -40,7 +42,9 @@ class Email
     /**
      * @param string $email The email address to check whether it is a disposable or temporary email address
      *
-     * @throws InvalidDomainListException
+     * @return bool Returns true when the provided email address is in the disposable email list
+     *
+     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException
      */
     private function inDisposableEmailList(string $email): bool
     {
@@ -50,7 +54,9 @@ class Email
     }
 
     /**
-     * @param string $email the full email address
+     * @param string $email The full email address
+     *
+     * @return string Returns the email address domain
      */
     private function getEmailDomainFromFullEmailAddress(string $email): string
     {
@@ -59,6 +65,8 @@ class Email
 
     /**
      * @throws InvalidDomainListException
+     *
+     * @return string[] Returns an array of disposable and temporary email address domains
      */
     private function getDomainsFromFile(): array
     {
