@@ -85,7 +85,6 @@ new Email('/path/to/custom/list.txt');
 
 If an invalid list is provided then an `InvalidDomainListException` is thrown.
 
-
 ###
 
 ## Getting Started with this Repository
