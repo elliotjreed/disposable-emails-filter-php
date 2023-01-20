@@ -8,6 +8,16 @@ All credit to the maintaining of the list of disposable / temporary email addres
 
 This project and it's maintainer(s) do not discourage the use of such disposable / temporary email addresses, but simply allows for the detection of such.
 
+## Installation
+
+PHP 7.4 or above is required.
+
+To install via [Composer](https://getcomposer.org/download/):
+
+```bash
+composer require elliotjreed/disposable-emails-filter
+```
+
 ## Usage
 
 The checker / filter can either be used via a static or non-static means:
