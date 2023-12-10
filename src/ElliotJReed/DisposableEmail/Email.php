@@ -6,7 +6,6 @@ namespace ElliotJReed\DisposableEmail;
 
 use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
-use SplFileObject;
 
 class Email
 {
@@ -64,13 +63,13 @@ class Email
     }
 
     /**
-     * @throws InvalidDomainListException
-     *
      * @return string[] Returns an array of disposable and temporary email address domains
+     *
+     * @throws InvalidDomainListException
      */
     private function getDomainsFromFile(): array
     {
-        $file = new SplFileObject($this->emailListPath);
+        $file = new \SplFileObject($this->emailListPath);
         $fileContents = $file->fread($file->getSize());
         if (false === $fileContents || \strlen($fileContents) < 3) {
             throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);

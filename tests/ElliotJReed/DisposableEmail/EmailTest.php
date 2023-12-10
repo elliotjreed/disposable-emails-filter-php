@@ -8,15 +8,14 @@ use ElliotJReed\DisposableEmail\Email;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use PHPUnit\Framework\TestCase;
-use SplFileObject;
 
 final class EmailTest extends TestCase
 {
-    private SplFileObject $list;
+    private \SplFileObject $list;
 
     protected function setUp(): void
     {
-        $this->list = new SplFileObject(\sys_get_temp_dir() . '/disposable_email_test.txt', 'wb');
+        $this->list = new \SplFileObject(\sys_get_temp_dir() . '/disposable_email_test.txt', 'wb');
     }
 
     protected function tearDown(): void
