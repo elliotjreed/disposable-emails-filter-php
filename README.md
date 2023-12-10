@@ -10,7 +10,7 @@ This project and it's maintainer(s) do not discourage the use of such disposable
 
 ## Installation
 
-PHP 7.4 or above is required.
+PHP 8.1 or above is required. If PHP 7.4 to 8.0 is required please use version 3.
 
 To install via [Composer](https://getcomposer.org/download/):
 
