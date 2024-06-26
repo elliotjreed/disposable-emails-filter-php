@@ -9,7 +9,7 @@ use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 
 class Email
 {
-    private string $emailListPath;
+    protected string $emailListPath;
 
     /**
      * @param string $emailListPath The path to a custom list of email domains.
@@ -45,7 +45,7 @@ class Email
      *
      * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException
      */
-    private function inDisposableEmailList(string $email): bool
+    protected function inDisposableEmailList(string $email): bool
     {
         $emailDomain = $this->getEmailDomainFromFullEmailAddress($email);
 
@@ -57,7 +57,7 @@ class Email
      *
      * @return string Returns the email address domain
      */
-    private function getEmailDomainFromFullEmailAddress(string $email): string
+    protected function getEmailDomainFromFullEmailAddress(string $email): string
     {
         return (string) \substr($email, (int) \strpos($email, '@') + 1);
     }
@@ -67,7 +67,7 @@ class Email
      *
      * @throws InvalidDomainListException
      */
-    private function getDomainsFromFile(): array
+    protected function getDomainsFromFile(): array
     {
         $file = new \SplFileObject($this->emailListPath);
         $fileContents = $file->fread($file->getSize());
