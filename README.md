@@ -10,7 +10,7 @@ This project and it's maintainer(s) do not discourage the use of such disposable
 
 ## Installation
 
-PHP 8.1 or above is required. If PHP 7.4 to 8.0 is required please use version 3.
+PHP 8.2 or above is required. If PHP 8.1 is required please use version 4.  If PHP 7.4 to 8.0 is required please use version 3.
 
 To install via [Composer](https://getcomposer.org/download/):
 
@@ -19,6 +19,8 @@ composer require elliotjreed/disposable-emails-filter
 ```
 
 ## Usage
+
+### Check if the email address is in the temporary domain list
 
 The checker / filter can either be used via a static or non-static means:
 
@@ -45,6 +47,36 @@ use ElliotJReed\DisposableEmail\DisposableEmail;
 
 if (DisposableEmail::isDisposable('email@temporarymailaddress.com')) {
     echo 'This is a disposable / temporary email address';
+}
+```
+
+### List all domains in the temporary email domain list
+
+The lister can either be used via a static or non-static means:
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use ElliotJReed\DisposableEmail\Email;
+
+foreach ((new Email())->getDomainList() as $domain) {
+    echo $domain . PHP_EOL;
+}
+```
+
+or
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use ElliotJReed\DisposableEmail\DisposableEmail;
+
+foreach (DisposableEmail::getDomainList() as $domain) {
+    echo $domain . PHP_EOL;
 }
 ```
 

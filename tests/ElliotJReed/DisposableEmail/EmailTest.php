@@ -8,14 +8,15 @@ use ElliotJReed\DisposableEmail\Email;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use PHPUnit\Framework\TestCase;
+use SplFileObject;
 
 final class EmailTest extends TestCase
 {
-    private \SplFileObject $list;
+    private SplFileObject $list;
 
     protected function setUp(): void
     {
-        $this->list = new \SplFileObject(\sys_get_temp_dir() . '/disposable_email_test.txt', 'wb');
+        $this->list = new SplFileObject(\sys_get_temp_dir() . '/disposable_email_test.txt', 'wb');
     }
 
     protected function tearDown(): void
@@ -23,7 +24,7 @@ final class EmailTest extends TestCase
         \unlink($this->list->getRealPath());
     }
 
-    public function testItReturnsTrueWhenEmailIsInDisposableEmailList(): void
+    public function testItReturnsTrueWhenEmailIsInDisposableEmailListWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('disposable.com');
         $email = (new Email($this->list->getRealPath()))->isDisposable('email@disposable.com');
@@ -31,7 +32,7 @@ final class EmailTest extends TestCase
         $this->assertTrue($email);
     }
 
-    public function testItNormalisesLineEndingsInEmailList(): void
+    public function testItNormalisesLineEndingsInEmailListWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite("temporary.com\r\ndisposable.com\r\n");
         $email = (new Email($this->list->getRealPath()))->isDisposable('email@disposable.com');
@@ -39,7 +40,7 @@ final class EmailTest extends TestCase
         $this->assertTrue($email);
     }
 
-    public function testItReturnsTrueWhenEmailIsInDisposableEmailListAndProvidedEmailIsUppercase(): void
+    public function testItReturnsTrueWhenEmailIsInDisposableEmailListAndProvidedEmailIsUppercaseWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('disposable.com');
         $email = (new Email($this->list->getRealPath()))->isDisposable('EMAIL@DISPOSABLE.COM');
@@ -47,7 +48,7 @@ final class EmailTest extends TestCase
         $this->assertTrue($email);
     }
 
-    public function testItReturnsFalseWhenEmailIsNotInDisposableEmailList(): void
+    public function testItReturnsFalseWhenEmailIsNotInDisposableEmailListWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('disposable.com');
         $email = (new Email($this->list->getRealPath()))->isDisposable('email@not-disposable.com');
@@ -55,7 +56,7 @@ final class EmailTest extends TestCase
         $this->assertFalse($email);
     }
 
-    public function testItThrowsInvalidEmailExceptionWhenEmailIsInvalid(): void
+    public function testItThrowsInvalidEmailExceptionWhenEmailIsInvalidWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('disposable.com');
 
@@ -64,12 +65,28 @@ final class EmailTest extends TestCase
         (new Email($this->list->getRealPath()))->isDisposable('invalid email address');
     }
 
-    public function testItThrowsInvalidDomainListExceptionWhenFileDoesNotAppearValid(): void
+    public function testItThrowsInvalidDomainListExceptionWhenFileDoesNotAppearValidWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('a');
 
         $this->expectException(InvalidDomainListException::class);
 
         (new Email($this->list->getRealPath()))->isDisposable('email@not-disposable.com');
+    }
+
+    public function testItGetsListOfTemporaryDomains(): void
+    {
+        $this->list->fwrite('disposable.com');
+
+        $this->assertSame(['disposable.com'], (new Email($this->list->getRealPath()))->getDomainList());
+    }
+
+    public function testItThrowsInvalidDomainListExceptionWhenFileDoesNotAppearValidWhenGettingTemporaryDomainList(): void
+    {
+        $this->list->fwrite('a');
+
+        $this->expectException(InvalidDomainListException::class);
+
+        (new Email($this->list->getRealPath()))->getDomainList();
     }
 }

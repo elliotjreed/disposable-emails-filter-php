@@ -6,6 +6,7 @@ namespace ElliotJReed\DisposableEmail;
 
 use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
+use SplFileObject;
 
 class Email
 {
@@ -26,8 +27,8 @@ class Email
      *
      * @return bool Returns true when the provided email address is likely to be a disposable or temporary email address
      *
-     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException
-     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException
+     * @throws InvalidEmailException
+     * @throws InvalidDomainListException
      */
     public function isDisposable(string $email): bool
     {
@@ -39,11 +40,21 @@ class Email
     }
 
     /**
+     * @return string[] Returns an array of disposable and temporary email address domains
+     *
+     * @throws InvalidDomainListException
+     */
+    public function getDomainList(): array
+    {
+        return $this->getDomainsFromFile();
+    }
+
+    /**
      * @param string $email The email address to check whether it is a disposable or temporary email address
      *
      * @return bool Returns true when the provided email address is in the disposable email list
      *
-     * @throws \ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException
+     * @throws InvalidDomainListException
      */
     private function inDisposableEmailList(string $email): bool
     {
@@ -69,7 +80,7 @@ class Email
      */
     private function getDomainsFromFile(): array
     {
-        $file = new \SplFileObject($this->emailListPath);
+        $file = new SplFileObject($this->emailListPath);
         $fileContents = $file->fread($file->getSize());
         if (false === $fileContents || \strlen($fileContents) < 3) {
             throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);
