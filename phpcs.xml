@@ -3,7 +3,9 @@
     <description>PSR-2 and PSR-12 Coding Standards</description>
     <arg value="p"/>
     <arg name="colors"/>
-    <rule ref="PSR2"/>
+    <rule ref="PSR2">
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
     <rule ref="PSR12"/>
     <file>./src</file>
     <file>./tests</file>
