@@ -267,7 +267,6 @@ ahk.jp
 ahmedkhlef.com
 air2token.com
 airmailbox.website
-airsi.de
 aiworldx.com
 ajaxapp.net
 akapost.com
@@ -1161,6 +1160,7 @@ evopo.com
 evusd.com
 evvgo.com
 evyush.com
+exclussi.com
 exdonuts.com
 exelica.com
 existiert.net
