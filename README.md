@@ -131,7 +131,7 @@ If an invalid list is provided then an `InvalidDomainListException` is thrown.
 
 ## Getting Started with this Repository
 
-PHP 7.4 or above and Composer is expected to be installed on our system.
+PHP 8.2 or above and Composer is expected to be installed on our system.
 
 ### Installing Composer
 
