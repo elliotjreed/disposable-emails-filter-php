@@ -58,9 +58,19 @@ class Email
      */
     private function inDisposableEmailList(string $email): bool
     {
-        $emailDomain = $this->getEmailDomainFromFullEmailAddress($email);
+        $emailDomain = \strtolower($this->getEmailDomainFromFullEmailAddress($email));
+        $domainParts = \explode('.', $emailDomain);
+        $domains = $this->getDomainsFromFile();
 
-        return \in_array(\strtolower($emailDomain), $this->getDomainsFromFile(), true);
+        // Check domain and all parent domains (skip checking TLD alone)
+        for ($i = 0, $count = \count($domainParts); $i < $count - 1; $i++) {
+            $checkDomain = \implode('.', \array_slice($domainParts, $i));
+            if (\in_array($checkDomain, $domains, true)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
