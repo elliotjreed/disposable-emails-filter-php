@@ -56,6 +56,30 @@ final class EmailTest extends TestCase
         $this->assertFalse($email);
     }
 
+    public function testItReturnsTrueWhenEmailDomainIsASubdomainOfADisposableEmailDomainWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $this->list->fwrite('disposable.com');
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@sub.disposable.com');
+
+        $this->assertTrue($email);
+    }
+
+    public function testItReturnsTrueWhenEmailDomainIsANestedSubdomainOfADisposableEmailDomainWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $this->list->fwrite('disposable.com');
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@another.sub.disposable.com');
+
+        $this->assertTrue($email);
+    }
+
+    public function testItReturnsTrueWhenEmailDomainIsAnUppercaseSubdomainOfADisposableEmailDomainWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $this->list->fwrite('disposable.com');
+        $email = (new Email($this->list->getRealPath()))->isDisposable('email@SUB.DISPOSABLE.COM');
+
+        $this->assertTrue($email);
+    }
+
     public function testItThrowsInvalidEmailExceptionWhenEmailIsInvalidWhenCheckingIfEmailIsTemporaryDomain(): void
     {
         $this->list->fwrite('disposable.com');

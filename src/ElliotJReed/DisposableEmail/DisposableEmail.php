@@ -18,7 +18,7 @@ final class DisposableEmail
      */
     public static function isDisposable(string $email): bool
     {
-        return (new Email())->isDisposable($email);
+        return new Email()->isDisposable($email);
     }
 
     /**
@@ -28,6 +28,6 @@ final class DisposableEmail
      */
     public static function getDomainList(): array
     {
-        return (new Email())->getDomainList();
+        return new Email()->getDomainList();
     }
 }

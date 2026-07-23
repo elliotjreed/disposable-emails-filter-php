@@ -10,7 +10,9 @@ This project and it's maintainer(s) do not discourage the use of such disposable
 
 ## Installation
 
-PHP 8.2 or above is required. If PHP 8.1 is required please use version 4.  If PHP 7.4 to 8.0 is required please use version 3.
+PHP 8.4 or above is required.
+
+Older versions of PHP are supported via old releases, however they will not receive updates from the upstream disposable email domain list. If PHP 8.3 or 8.2 is required, please use version 5. If PHP 8.1 is required please use version 4. If PHP 7.4 to 8.0 is required please use version 3.
 
 To install via [Composer](https://getcomposer.org/download/):
 

@@ -8,18 +8,15 @@ use ElliotJReed\DisposableEmail\Exceptions\InvalidDomainListException;
 use ElliotJReed\DisposableEmail\Exceptions\InvalidEmailException;
 use SplFileObject;
 
-class Email
+readonly class Email
 {
-    private string $emailListPath;
-
     /**
      * @param string $emailListPath The path to a custom list of email domains.
      *                              The default is the list maintained by
-     *                              https://github.com/martenson/disposable-email-domains.
+     *                              https://github.com/disposable-email-domains/disposable-email-domains.
      */
-    public function __construct(string $emailListPath = __DIR__ . '/../../../list.txt')
+    public function __construct(private string $emailListPath = __DIR__ . '/../../../list.txt')
     {
-        $this->emailListPath = $emailListPath;
     }
 
     /**
@@ -52,15 +49,25 @@ class Email
     /**
      * @param string $email The email address to check whether it is a disposable or temporary email address
      *
-     * @return bool Returns true when the provided email address is in the disposable email list
+     * @return bool Returns true when the provided email address, or any parent domain of it, is in the disposable email list
      *
      * @throws InvalidDomainListException
      */
     private function inDisposableEmailList(string $email): bool
     {
-        $emailDomain = $this->getEmailDomainFromFullEmailAddress($email);
+        $emailDomain = \strtolower($this->getEmailDomainFromFullEmailAddress($email));
+        $disposableDomains = \array_flip($this->getDomainsFromFile());
 
-        return \in_array(\strtolower($emailDomain), $this->getDomainsFromFile(), true);
+        $domainLabels = \explode('.', $emailDomain);
+        while (\count($domainLabels) > 1) {
+            if (isset($disposableDomains[\implode('.', $domainLabels)])) {
+                return true;
+            }
+
+            \array_shift($domainLabels);
+        }
+
+        return false;
     }
 
     /**
@@ -70,7 +77,7 @@ class Email
      */
     private function getEmailDomainFromFullEmailAddress(string $email): string
     {
-        return (string) \substr($email, (int) \strpos($email, '@') + 1);
+        return \substr($email, (int) \strpos($email, '@') + 1);
     }
 
     /**

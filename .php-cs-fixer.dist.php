@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\FunctionNotation\NativeFunctionInvocationFixer;
-
-$finder = (new PhpCsFixer\Finder())
+$finder = new PhpCsFixer\Finder()
     ->in(__DIR__)
     ->exclude('.github')
     ->exclude('node_modules')
@@ -12,12 +10,13 @@ $finder = (new PhpCsFixer\Finder())
     ->exclude('coverage')
     ->exclude('vendor');
 
-return (new PhpCsFixer\Config())
+return new PhpCsFixer\Config()
     ->setRules([
         '@PSR2' => true,
         '@PSR12:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
+        'declare_strict_types' => ['strategy' => 'add_when_missing'],
         'trailing_comma_in_multiline' => ['after_heredoc' => true, 'elements' => []],
         'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
         'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
