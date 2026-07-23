@@ -8,7 +8,8 @@ $finder = new PhpCsFixer\Finder()
     ->exclude('node_modules')
     ->exclude('var')
     ->exclude('coverage')
-    ->exclude('vendor');
+    ->exclude('vendor')
+    ->notPath('/^list\.php$/');
 
 return new PhpCsFixer\Config()
     ->setRules([

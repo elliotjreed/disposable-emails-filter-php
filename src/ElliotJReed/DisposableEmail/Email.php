@@ -11,11 +11,13 @@ use SplFileObject;
 readonly class Email
 {
     /**
-     * @param string $emailListPath The path to a custom list of email domains.
-     *                              The default is the list maintained by
+     * @param string $emailListPath The path to a custom list of email domains, either a new-line
+     *                              separated plain-text file or a compiled PHP file returning an
+     *                              array of domain strings (detected via a ".php" file extension).
+     *                              The default is the compiled list maintained by
      *                              https://github.com/disposable-email-domains/disposable-email-domains.
      */
-    public function __construct(private string $emailListPath = __DIR__ . '/../../../list.txt')
+    public function __construct(private string $emailListPath = __DIR__ . '/../../../list.php')
     {
     }
 
@@ -87,6 +89,10 @@ readonly class Email
      */
     private function getDomainsFromFile(): array
     {
+        if (\str_ends_with($this->emailListPath, '.php')) {
+            return $this->getDomainsFromCompiledFile();
+        }
+
         $file = new SplFileObject($this->emailListPath);
         $fileContents = $file->fread($file->getSize());
         if (false === $fileContents || \strlen($fileContents) < 3) {
@@ -96,5 +102,24 @@ readonly class Email
         $fileContents = \preg_replace('~\R~u', "\n", $fileContents);
 
         return \explode("\n", $fileContents);
+    }
+
+    /**
+     * @return string[] Returns an array of disposable and temporary email address domains
+     *
+     * @throws InvalidDomainListException
+     */
+    private function getDomainsFromCompiledFile(): array
+    {
+        if (!\is_file($this->emailListPath)) {
+            throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);
+        }
+
+        $domains = include $this->emailListPath;
+        if (!\is_array($domains) || \count($domains) < 1) {
+            throw new InvalidDomainListException('Invalid domain list file: ' . $this->emailListPath);
+        }
+
+        return $domains;
     }
 }

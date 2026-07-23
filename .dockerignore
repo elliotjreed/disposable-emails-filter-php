@@ -16,6 +16,7 @@ yarn-error.log
 /.env.local.php
 /.env.*.local
 /tests
+/bin
 /LICENSE
 /Makefile
 /phpunit.xml

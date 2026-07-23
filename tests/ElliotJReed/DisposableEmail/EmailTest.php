@@ -113,4 +113,67 @@ final class EmailTest extends TestCase
 
         (new Email($this->list->getRealPath()))->getDomainList();
     }
+
+    public function testItReturnsTrueWhenEmailIsInDisposableEmailListWhenUsingACompiledPhpDomainListWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $path = \sys_get_temp_dir() . '/disposable_email_test_compiled.php';
+        \file_put_contents($path, "<?php\n\ndeclare(strict_types=1);\n\nreturn ['disposable.com'];\n");
+
+        try {
+            $email = (new Email($path))->isDisposable('email@disposable.com');
+        } finally {
+            \unlink($path);
+        }
+
+        $this->assertTrue($email);
+    }
+
+    public function testItGetsListOfTemporaryDomainsWhenUsingACompiledPhpDomainList(): void
+    {
+        $path = \sys_get_temp_dir() . '/disposable_email_test_compiled.php';
+        \file_put_contents($path, "<?php\n\ndeclare(strict_types=1);\n\nreturn ['disposable.com'];\n");
+
+        try {
+            $domainList = (new Email($path))->getDomainList();
+        } finally {
+            \unlink($path);
+        }
+
+        $this->assertSame(['disposable.com'], $domainList);
+    }
+
+    public function testItThrowsInvalidDomainListExceptionWhenCompiledPhpDomainListFileDoesNotExistWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $this->expectException(InvalidDomainListException::class);
+
+        (new Email(\sys_get_temp_dir() . '/does-not-exist-disposable-email-list.php'))->isDisposable('email@disposable.com');
+    }
+
+    public function testItThrowsInvalidDomainListExceptionWhenCompiledPhpDomainListFileDoesNotReturnAnArrayWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $path = \sys_get_temp_dir() . '/disposable_email_test_invalid_compiled.php';
+        \file_put_contents($path, "<?php\n\ndeclare(strict_types=1);\n\nreturn 'not-an-array';\n");
+
+        $this->expectException(InvalidDomainListException::class);
+
+        try {
+            (new Email($path))->isDisposable('email@disposable.com');
+        } finally {
+            \unlink($path);
+        }
+    }
+
+    public function testItThrowsInvalidDomainListExceptionWhenCompiledPhpDomainListFileReturnsAnEmptyArrayWhenCheckingIfEmailIsTemporaryDomain(): void
+    {
+        $path = \sys_get_temp_dir() . '/disposable_email_test_empty_compiled.php';
+        \file_put_contents($path, "<?php\n\ndeclare(strict_types=1);\n\nreturn [];\n");
+
+        $this->expectException(InvalidDomainListException::class);
+
+        try {
+            (new Email($path))->isDisposable('email@disposable.com');
+        } finally {
+            \unlink($path);
+        }
+    }
 }
